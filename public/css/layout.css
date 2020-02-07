@@ -39,6 +39,7 @@ header {
 	-webkit-background-size: cover !important;
    text-align: center;
    overflow: hidden;
+   z-index: 10;
 }
 
 /* vertically center banner section */
@@ -188,7 +189,7 @@ ul#nav li.current a { color: #F06000; }
 /* ------------------------------------------------------------------ */
 
 #about {
-   background: #2B2B2B;
+   background:white;
    padding-top: 96px;
    padding-bottom: 66px;
    overflow: hidden;
@@ -203,7 +204,7 @@ ul#nav li.current a { color: #F06000; }
    margin-bottom: 12px;
 }
 #about h1 span {
-   color: white;
+   color:black;
    border-bottom: 3px solid #11ABB0;
    padding-bottom: 3px;
 }
@@ -214,7 +215,7 @@ ul#nav li.current a { color: #F06000; }
 }
 #about p {
    line-height: 30px;
-   color:white;
+   color:black;
 }
 #about .profile-pic {
    position: relative;
@@ -1013,7 +1014,7 @@ call-to-action .button {
 footer {
    padding-top: 48px;
    margin-bottom: 48px;
-   color: #303030;
+   color:white;
    font-size: 14px;
    text-align: center;
    position: relative;
