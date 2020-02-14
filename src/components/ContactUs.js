@@ -1,6 +1,87 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ContactUs extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangePhone = this.onChangePhone.bind(this);
+    this.onChangeSubject = this.onChangeSubject.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.state = {
+        name: '',
+        email: '',
+        phone: '',
+        subject:'',
+        description: ''
+        
+    }
+}
+
+onChangeName(e){
+  this.setState({
+      name: e.target.value
+  });
+}
+
+onChangeEmail(e){
+  this.setState({
+      email: e.target.value
+  });
+}
+
+onChangePhone(e){
+  this.setState({
+      phone: e.target.value
+  });
+}
+
+onChangeSubject(e){
+  this.setState({
+      subject: e.target.value
+  });
+}
+
+onChangeDescription(e){
+  this.setState({
+      description: e.target.value
+  });
+}
+
+
+onSubmit(e) {
+  e.preventDefault();
+
+  console.log(`Name: ${this.state.name}`);
+  console.log(`Email: ${this.state.email}`);
+  console.log(`Phone: ${this.state.phone}`);
+  console.log(`Subject: ${this.state.subject}`);
+  console.log(`Description: ${this.state.description}`);
+
+  const newTodo = {
+      name: this.state.name,
+      email: this.state.email,
+      phone: this.state.phone,
+      subject: this.state.subject,
+      description: this.state.description
+  }
+
+  axios.post('http://localhost:4000/add', newTodo)
+      .then(res => console.log(res.data));
+
+  this.setState({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      description: '' 
+  })
+}
 
   render() {
     let resumeData = this.props.resumeData;
@@ -42,30 +123,66 @@ export default class ContactUs extends Component {
               <br></br>
               <div className="row">
                 <div className = "twelve columns">
-                  <div className="six columns">
-                    <form action="" method="post" id="contactForm" name="contactForm">
-                         <input type="text" defaultValue="" size="35" id="contactName" name="contactName" onChange={this.handleChange} placeholder = "Your name"/>
-                         <input type="text" defaultValue="" size="35" id="contactName" name="contactName" onChange={this.handleChange} placeholder = "Phone"/>
-                    </form>
-                  </div>
-                  <div className="six columns">
-                      <form action="" method="post" id="contactForm" name="contactForm">
-                           <input type="text" defaultValue="" size="35" id="contactName" name="contactName" onChange={this.handleChange} placeholder = "Email"/>
-                           <input type="text" defaultValue="" size="35" id="contactName" name="contactName" onChange={this.handleChange} placeholder = "Subject"/>
-                      </form>
-                  </div>
+                  <form id="contactForm" onSubmit = {this.onSubmit}>
+                    <div className="six columns">
+                        <input type="text"  
+                        size="35" id="contactName" 
+                        name="contactName"
+                        value = {this.state.name}
+                        onChange={this.onChangeName} 
+                        placeholder = "Your name"
+                        />
+                        <input type="text"  
+                        size="35" 
+                        id="contactName" 
+                        name="contactName" 
+                        value = {this.state.email}
+                        onChange={this.onChangeEmail} 
+                        placeholder = "Phone"
+                        />
+                    </div>
+                    <div className="six columns">
+                        <input type="text"  
+                        size="35" 
+                        id="contactName" 
+                        name="contactName" 
+                        value = {this.state.phone}
+                        onChange={this.onChangePhone} 
+                        placeholder = "Email"
+                        />
+                        <input type="text"  
+                        size="35" 
+                        id="contactName" 
+                        name="contactName" 
+                        value = {this.state.subject}
+                        onChange={this.onChangeSubject} 
+                        placeholder = "Subject"
+                        />
+                    </div>
+                  
                     <div className = "twelve columns" style = {{textAlign: 'center'}} >
-                      <textarea cols="70" rows="4" id="contactMessage" name="contactMessage" placeholder = "Brief Descriptoin of the App"></textarea>
-                      <button className="submit">Send</button>
+                      <textarea 
+                      cols="70" 
+                      rows="4" 
+                      id="contactMessage" 
+                      name="contactMessage" 
+                      placeholder = "Brief Descriptoin of the App"
+                      value = {this.state.description}
+                      onChange = {this.onChangeDescription}
+                      >
+                      </textarea>
+                      <button type = "submit" className="submit">Send</button>
                       <span id="image-loader">
                         <img alt="" src="images/loader.gif" />
                       </span>
                     </div>
+                    </form>
                     <div id="message-warning"> Error boy</div>
                     <div id="message-success">
                       <i className="fa fa-check"></i>Your message was sent, thank you!<br />
                     </div>
                   </div>
+                  
                 </div>
             </div>
             </div>
