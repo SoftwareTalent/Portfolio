@@ -71,7 +71,7 @@ onSubmit(e) {
       description: this.state.description
   }
 
-  axios.post('http://localhost:4000/add', newTodo)
+  axios.post('https://potfoliobackend.herokuapp.com/add', newTodo)
       .then(res => console.log(res.data));
 
   this.setState({
@@ -131,6 +131,7 @@ onSubmit(e) {
                         value = {this.state.name}
                         onChange={this.onChangeName} 
                         placeholder = "Your name"
+                        required
                         />
                         <input type="text"  
                         size="35" 
@@ -139,6 +140,7 @@ onSubmit(e) {
                         value = {this.state.email}
                         onChange={this.onChangeEmail} 
                         placeholder = "Phone"
+                        required
                         />
                     </div>
                     <div className="six columns">
@@ -149,6 +151,7 @@ onSubmit(e) {
                         value = {this.state.phone}
                         onChange={this.onChangePhone} 
                         placeholder = "Email"
+                        required
                         />
                         <input type="text"  
                         size="35" 
@@ -157,6 +160,7 @@ onSubmit(e) {
                         value = {this.state.subject}
                         onChange={this.onChangeSubject} 
                         placeholder = "Subject"
+                        required
                         />
                     </div>
                   
